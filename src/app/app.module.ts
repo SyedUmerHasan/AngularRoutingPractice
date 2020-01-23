@@ -7,13 +7,21 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { MainBodyComponent } from './main-body/main-body.component';
+import { CrouselComponent } from './crousel/crousel.component';
+import { GridboxesComponent } from './gridboxes/gridboxes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavigationBarComponent,
+    MainBodyComponent,
+    CrouselComponent,
+    GridboxesComponent
   ],
   imports: [
     BrowserModule,
