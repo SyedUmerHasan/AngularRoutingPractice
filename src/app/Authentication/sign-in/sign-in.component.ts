@@ -1,5 +1,6 @@
 import { JWTapiService } from './../../WebApi/JWT/jwtapi.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,12 +14,15 @@ export class SignInComponent implements OnInit {
   login = false;
   loginMessage = '';
 
-  constructor(private api: JWTapiService) { }
+  constructor(private api: JWTapiService , private router: Router) { }
 
   ngOnInit() {
-    this.check();
+    this.checkLogin();
     if (this.login === true) {
       this.loginMessage = 'Welcome user';
+      this.router.navigate(['/home']);
+    } else {
+
     }
   }
 
@@ -33,17 +37,16 @@ export class SignInComponent implements OnInit {
     console.log('password = ' + this.password);
     if (this.loginMessage !== 'Welcome user') {
       this.api.getLoginCredentials().subscribe(data => {
-        localStorage.setItem('token', data.toString());
+        localStorage.setItem('token', JSON.stringify(data));
       });
-      console.log(this.loginMessage);
       this.loginMessage = 'Welcome user';
+      this.router.navigate(['/home']);
     }
   }
 
-  check() {
+  checkLogin() {
     const p = localStorage.getItem('token');
-    console.log(p);
-    if (p == null) {
+    if (p === null || p === undefined || p === '' ) {
       console.log('token is null');
       this.login = false;
     } else {
